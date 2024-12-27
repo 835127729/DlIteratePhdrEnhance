@@ -1,7 +1,7 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    `maven-publish`
 }
 
 android {
@@ -9,13 +9,10 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.muye.dl_iterate_phdr_enhance"
         minSdk = 21
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
         externalNativeBuild {
             cmake {
                 arguments("-DANDROID_STL=c++_shared")
@@ -47,28 +44,44 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
-        compose = true
+        prefabPublishing = true
         prefab = true
+    }
+    prefab {
+        create("dl_iterate_phdr_enhance") {
+            headers = "src/main/cpp/include"
+        }
+    }
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
+    ndkVersion = "23.2.8568313"
+}
+
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.muye"
+            artifactId = "dl_iterate_phdr_enhance"
+            version = "1.0.0"
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+
+        repositories {
+            maven {
+                name = "localRepo"
+                url = uri(layout.buildDirectory.dir("repo"))
+            }
+        }
     }
 }
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(project(":dl_iterate_phdr_enhance"))
-    implementation("com.github.835127729:ElfLoader:1.0.2")
 }
