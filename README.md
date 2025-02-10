@@ -23,11 +23,23 @@
 
 ## 三、快速开始
 
-你可以参考[app](https://github.com/835127729/MapsVisitor/tree/main/app)中的示例。
+你可以参考示例。
 
-### 1、在 build.gradle.kts 中增加依赖
+### 1、增加依赖
+```kotlin
+//settings.gradle.kts
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url = URI("https://jitpack.io") }
+    }
+}
+```
 
 ```Kotlin
+//build.gradle.kts
 android{
 	buildFeatures {        
     //1、声明可以进行原生依赖，具体参考https://developer.android.com/build/native-dependencies
