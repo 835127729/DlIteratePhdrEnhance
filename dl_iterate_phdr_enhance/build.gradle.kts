@@ -59,7 +59,7 @@ android {
     ndkVersion = "23.2.8568313"
     packagingOptions {
         excludes += listOf(
-            "**/libdl_iterate_phdr_enhance.so",
+            "**/libmaps_visitor.so",
         )
     }
 }
