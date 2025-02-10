@@ -7,6 +7,7 @@
 #include <dlfcn.h>
 #include <malloc.h>
 #include <unistd.h>
+#include <string.h>
 
 #define TAG "hook_linker"
 /**
