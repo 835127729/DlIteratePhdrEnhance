@@ -1,7 +1,7 @@
 package com.muye.dl_iterate_phdr_enhance
 
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -10,15 +10,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.muye.dl_iterate_phdr_enhance.ui.theme.DlIteratePhdrEnhanceTheme
-import java.io.File
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,10 +41,24 @@ class MainActivity : ComponentActivity() {
                     ) {
                         Button(
                             {
-                                DlIteratePhdrEnhanceTest.iteratePhdr()
+                                DlIteratePhdrEnhanceTest.system()
                             }
                         ) {
-                            Text("测试")
+                            Text("原生dl_iterate_phdr")
+                        }
+                        Button(
+                            {
+                                DlIteratePhdrEnhanceTest.enhanced()
+                            }
+                        ) {
+                            Text("增强dl_iterate_phdr")
+                        }
+                        Button(
+                            {
+                                DlIteratePhdrEnhanceTest.byMaps()
+                            }
+                        ) {
+                            Text("兜底dl_iterate_phdr(通过遍历proc/pid/maps)")
                         }
                     }
                 }

@@ -9,14 +9,13 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 16
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
         externalNativeBuild {
             cmake {
-                arguments("-DANDROID_STL=c++_shared")
-                cppFlags("")
+                arguments("-DANDROID_STL=none")
             }
         }
     }
@@ -58,6 +57,11 @@ android {
         }
     }
     ndkVersion = "23.2.8568313"
+    packagingOptions {
+        excludes += listOf(
+            "**/libdl_iterate_phdr_enhance.so",
+        )
+    }
 }
 
 publishing {
@@ -84,4 +88,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.mapsvisitor)
 }

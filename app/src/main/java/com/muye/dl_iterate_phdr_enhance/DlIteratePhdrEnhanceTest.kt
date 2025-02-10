@@ -8,5 +8,10 @@ object DlIteratePhdrEnhanceTest {
         ElfLoader.loadLibrary("test")
     }
 
-    external fun iteratePhdr()
+    //原生dl_iterate_phdr遍历
+    external fun system()
+    //dl_iterate_phdr_enhanced遍历
+    external fun enhanced()
+    //dl_iterate_phdr_by_maps遍历
+    external fun byMaps()
 }

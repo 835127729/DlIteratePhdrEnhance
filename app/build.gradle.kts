@@ -70,5 +70,5 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(project(":dl_iterate_phdr_enhance"))
-    implementation("com.github.835127729:ElfLoader:1.0.2")
+    implementation(libs.elfloader)
 }

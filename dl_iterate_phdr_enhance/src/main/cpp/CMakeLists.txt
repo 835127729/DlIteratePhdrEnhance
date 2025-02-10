@@ -26,19 +26,18 @@ project("dl_iterate_phdr_enhance")
 # used in the AndroidManifest.xml file.
 add_library(${CMAKE_PROJECT_NAME} SHARED
         # List C/C++ source files with relative paths to this CMakeLists.txt.
-        hash_util.h
         Log.h
-        disk_elf.c
-        disk_elf.h
         hook_linker.h
         hook_linker.c
-        maps_visitor.h
-        maps_visitor.c
-        memory_elf.c
+        linker_elf.c
+        linker_elf.h
         memory_elf.h
+        memory_elf.c
         include/dl_iterate_phdr_enhance.h
         dl_iterate_phdr_enhance.c
 )
+
+find_package(maps_visitor REQUIRED CONFIG)
 
 # Specifies libraries CMake should link to your target library. You
 # can link libraries from various origins, such as libraries defined in this
@@ -46,4 +45,5 @@ add_library(${CMAKE_PROJECT_NAME} SHARED
 target_link_libraries(${CMAKE_PROJECT_NAME}
         # List libraries link to the target library
         android
+        maps_visitor::maps_visitor
         log)
