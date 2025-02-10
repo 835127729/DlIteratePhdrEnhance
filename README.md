@@ -60,24 +60,26 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 
 ### 3、增加打包选项
 
-如果你是在一个 SDK 工程里使用 MapsVisitor，你可能需要避免把`libmaps_visitor.so` 打包到你的 AAR 里，以免 app 工程打包时遇到重复的 `libmaps_visitor.so` 文件。
+如果你是在一个 SDK 工程里使用 DlIteratePhdrEnhance，你可能需要避免把`libdl_iterate_phdr_enhance.so` 打包到你的 AAR 里，以免 app 工程打包时遇到重复的 `libdl_iterate_phdr_enhance.so` 文件。
 
 ```Kotlin
 android {
     packagingOptions {
         excludes += listOf(
+            "**/libmaps_visitor.so",
             "**/libdl_iterate_phdr_enhance.so",
         )
     }
 }
 ```
 
-另一方面, 如果你是在一个 APP 工程里使用 MapsVisitor，你可以需要增加一些选项，用来处理重复的 `libmaps_visitor.so` 文件引起的冲突。
+另一方面, 如果你是在一个 APP 工程里使用 MapsVisitor，你可以需要增加一些选项，用来处理重复的 `libdl_iterate_phdr_enhance.so` 文件引起的冲突。
 
 ```Kotlin
 android {
     packagingOptions {
         pickFirsts += listOf(
+            "**/libmaps_visitor.so",
             "**/libdl_iterate_phdr_enhance.so",
         )
     }
