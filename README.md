@@ -59,12 +59,12 @@ dependencies {
 
 ```Makefile
 ...
-find_package(iterate_phdr_enhance REQUIRED CONFIG)
+find_package(dl_iterate_phdr_enhance REQUIRED CONFIG)
   
 ...
 target_link_libraries(${CMAKE_PROJECT_NAME}
         # List libraries link to the target library
-        iterate_phdr_enhance::iterate_phdr_enhance
+        dl_iterate_phdr_enhance::dl_iterate_phdr_enhance
 )
 ```
 
@@ -85,7 +85,7 @@ android {
 }
 ```
 
-另一方面, 如果你是在一个 APP 工程里使用 MapsVisitor，你可以需要增加一些选项，用来处理重复的 `libdl_iterate_phdr_enhance.so` 文件引起的冲突。
+另一方面, 如果你是在一个 APP 工程里使用 DlIteratePhdrEnhance，你可以需要增加一些选项，用来处理重复的 `libdl_iterate_phdr_enhance.so` 文件引起的冲突。
 
 ```Kotlin
 android {
